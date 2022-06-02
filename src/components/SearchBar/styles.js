@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 width: 100%;
-display: flex;
-max-width: 300px;
+display: grid;
+grid-template-columns: 1fr 1fr 0.7fr;
+max-width: ${({ size }) => `${size}px`};
 height: 56px;
 box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
 border-radius: 16px;
@@ -13,7 +14,6 @@ border-radius: 16px;
   font-size: 14px;
   width: 100%;
   font-size: 'Mulish', sans-serif;
-  padding: 0 16px;
 }
 
 #search-icon{
@@ -25,14 +25,13 @@ border-radius: 16px;
   button{
     border: transparent;
     background-color: transparent;
-    padding: 0 16px;
   }
 
   input{
     color: #BDBDBD;
+    width: 100%;
     background-color: transparent;
     padding: 0 16px;
-    max-width: 100px;
     border: none;
   }
 `;

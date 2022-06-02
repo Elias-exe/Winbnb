@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Container, CardGroup, Card } from './styles';
+import { CardGroup, Card } from './styles';
 import stays from '../../components/stays.json';
 
+import { SelectContainer } from '../../components/SelectContainer';
 import PageHeader from '../../components/PageHeader';
 import Header from '../../components/Header';
 
@@ -17,14 +18,15 @@ export default function Home() {
   }, [loadHouses]);
 
   return (
-    <Container>
+    <>
+      <SelectContainer />
       <Header />
       <PageHeader />
 
       <CardGroup>
         {house.map((stay) => (
-          <Card key={stay.city}>
-            <img src={stay.photo} alt="Hotel" />
+          <Card>
+            <img src={stay.photo} alt="Stay" />
             <div className="infos">
               {stay.superHost && (
                 <span className="host-tag">SUPER HOST</span>
@@ -41,6 +43,6 @@ export default function Home() {
 
       </CardGroup>
 
-    </Container>
+    </>
   );
 }
