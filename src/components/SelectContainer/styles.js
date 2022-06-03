@@ -1,40 +1,48 @@
 import styled from 'styled-components';
 
+export const Overlay = styled.div`
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  position: absolute;
+  width: 100% !important;
+  height: 370vh !important;
+  left: 0;
+  top: 0;
+`;
+
 export const Container = styled.div`
   width: 100%;
-  height: 50%;
-  max-height: 460px;
+  min-height: 360px;
+  height: auto;
   background-color: white;
-  position: absolute;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
   .infos{
     display: flex;
-    align-items: center;
+    width: 80vw;
     flex-direction: column;
-  }
-
-  .material-icons{
-    margin-right: 10px;
-  }
-
-  .location{
-    width: 100%;
-    display: flex;
-    max-width: 250px;
-    flex-direction: column;
-    margin-top: 42px;
-    margin-left: 123px;
-
-    button{
+    margin-top: 70px;
+    .searchBar-container{
       display: flex;
-      align-items: center;
-      background: transparent;
-      border: none;
-      margin-bottom: 32px;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-top:41px ;
+
+      .location{
+        display: flex;
+        align-items: center;
+        margin-bottom: 36px;
+        background: transparent;
+        border: none;
+        .material-icons{
+          margin-right: 10px;
+        }
+      }
     }
   }
+
 `;

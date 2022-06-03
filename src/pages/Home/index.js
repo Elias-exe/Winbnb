@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CardGroup, Card } from './styles';
 import stays from '../../components/stays.json';
 
-import { SelectContainer } from '../../components/SelectContainer';
+import SelectContainer from '../../components/SelectContainer';
 import PageHeader from '../../components/PageHeader';
 import Header from '../../components/Header';
 

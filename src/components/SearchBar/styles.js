@@ -9,22 +9,30 @@ height: 56px;
 box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
 border-radius: 16px;
 
-#select-location{
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  width: 100%;
-  font-size: 'Mulish', sans-serif;
-}
 
 #search-icon{
+  border-top: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
   color: ${({ theme }) => theme.colors.red.primary};
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 'Mulish', sans-serif;
 }
 
   button{
-    border: transparent;
+    border: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     background-color: transparent;
+
+    .location-container{
+    margin-bottom: 15px;
+    .location-label{
+      margin-bottom: 5px;
+    }
+  }
+    &:focus{
+    border: 2px solid black;
+  }
   }
 
   input{

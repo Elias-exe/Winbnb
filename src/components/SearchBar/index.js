@@ -1,37 +1,19 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import Select from '../Select';
-import stays from '../stays.json';
 import { Container } from './styles';
 
-export default function SearchBar({ size }) {
-  const [stay, useStay] = useState([]);
-
-  const setStay = new Set();
-
-  const filteredStay = stay.filter((location) => {
-    const duplicatedLocation = setStay.has(location.city);
-    setStay.add(location.city);
-    return !duplicatedLocation;
-  });
-
-  function loadStay() {
-    useStay(stays);
-  }
-
-  useEffect(() => {
-    loadStay();
-  });
-
+export default function SearchBar({ size, buttonLabel, metodo }) {
   return (
     <Container size={size}>
-      <Select>
-        {filteredStay.map((location) => (
-          <option value="">{location.city}, {location.country}</option>
-        ))}
-      </Select>
-      <input type="text" placeholder="Add guests" />
+      <button type="button" onClick={metodo}>
+        <div className="location-container">
+          <div className="location-label">
+            <span>Location</span>
+          </div>
+          {buttonLabel}
+        </div>
+      </button>
+      <input type="number" placeholder="Add guests" />
       <button id="search-icon" className="material-icons" type="button">search</button>
     </Container>
   );
@@ -39,8 +21,12 @@ export default function SearchBar({ size }) {
 
 SearchBar.propTypes = {
   size: PropTypes.number,
+  buttonLabel: PropTypes.string,
+  metodo: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
   size: 300,
+  buttonLabel: 'Add Location',
+  metodo: false,
 };
