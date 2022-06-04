@@ -24,5 +24,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     camelcase: 'off',
     'react/jsx-no-bind': 'off',
+    'prefer-const': 'off',
+    'no-nested-ternary': 'off',
   },
 };

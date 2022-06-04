@@ -20,6 +20,7 @@ border-radius: 16px;
 }
 
   button{
+    width: 100%;
     border: none;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     background-color: transparent;
@@ -33,6 +34,16 @@ border-radius: 16px;
     &:focus{
     border: 2px solid black;
   }
+  .guestButtonContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    strong{
+      margin-bottom: 5px;
+    }
+  }
   }
 
   input{
@@ -42,4 +53,6 @@ border-radius: 16px;
     padding: 0 16px;
     border: none;
   }
+
+
 `;

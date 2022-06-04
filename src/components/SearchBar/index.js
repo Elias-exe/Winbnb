@@ -2,18 +2,30 @@
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-export default function SearchBar({ size, buttonLabel, metodo }) {
+export default function SearchBar({
+  size,
+  buttonLabel,
+  handleShowStayList,
+  guestLabel,
+  handleShowGuestInfos,
+}) {
   return (
     <Container size={size}>
-      <button type="button" onClick={metodo}>
+      <button type="button" onClick={handleShowStayList}>
         <div className="location-container">
           <div className="location-label">
-            <span>Location</span>
+            <strong>Location</strong>
           </div>
           {buttonLabel}
         </div>
       </button>
-      <input type="number" placeholder="Add guests" />
+      <button type="button" onClick={handleShowGuestInfos}>
+        <div className="guestButtonContainer">
+          <strong>Guest</strong>
+          { guestLabel === 0 ? 'Add guests' : (guestLabel > 1 ? `${guestLabel} guests` : `${guestLabel} guest`)}
+        </div>
+
+      </button>
       <button id="search-icon" className="material-icons" type="button">search</button>
     </Container>
   );
@@ -21,12 +33,15 @@ export default function SearchBar({ size, buttonLabel, metodo }) {
 
 SearchBar.propTypes = {
   size: PropTypes.number,
+  guestLabel: PropTypes.number.isRequired,
   buttonLabel: PropTypes.string,
-  metodo: PropTypes.bool,
+  handleShowStayList: PropTypes.bool,
+  handleShowGuestInfos: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
   size: 300,
   buttonLabel: 'Add Location',
-  metodo: false,
+  handleShowStayList: false,
+  handleShowGuestInfos: false,
 };

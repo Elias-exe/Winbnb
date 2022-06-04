@@ -4,7 +4,8 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   position: absolute;
-  width: 100% !important;
+  width: 100%;
+  max-width: 100vw;
   height: 370vh !important;
   left: 0;
   top: 0;
@@ -12,6 +13,7 @@ export const Overlay = styled.div`
 
 export const Container = styled.div`
   width: 100%;
+  max-width: 100vw;
   min-height: 360px;
   height: auto;
   background-color: white;
@@ -26,11 +28,15 @@ export const Container = styled.div`
     width: 80vw;
     flex-direction: column;
     margin-top: 70px;
+
+    .testes{
+      display: flex;
     .searchBar-container{
       display: flex;
-      align-items: flex-start;
       flex-direction: column;
       margin-top:41px ;
+      width: 100%;
+      max-width: 28vw;
 
       .location{
         display: flex;
@@ -38,11 +44,40 @@ export const Container = styled.div`
         margin-bottom: 36px;
         background: transparent;
         border: none;
+
         .material-icons{
           margin-right: 10px;
         }
       }
     }
+  .guestContainer{
+    margin-bottom: 70px;
+    .guestInfos{
+      display: flex;
+      flex-direction: column;
+      margin-top: 48px;
+
+      .contador{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        span{
+          font-size: 14px;
+        }
+
+        button{
+          background: transparent;
+          padding: 7px 10px;
+          border: 1px solid #828282;
+          border-radius: 4px;
+        }
+      }
+    }
   }
+
+  }
+}
 
 `;
