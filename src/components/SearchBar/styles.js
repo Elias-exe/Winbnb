@@ -19,21 +19,23 @@ border-radius: 16px;
   font-size: 'Mulish', sans-serif;
 }
 
-  button{
-    width: 100%;
-    border: none;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: transparent;
+button{
+  width: 100%;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 
-    .location-container{
-    margin-bottom: 15px;
+  .location-container{
+  margin-bottom: 15px;
+
     .location-label{
       margin-bottom: 5px;
     }
   }
-    &:focus{
-    border: 2px solid black;
-  }
+
+&:focus{
+  border: 2px solid black;
+}
   .guestButtonContainer{
     display: flex;
     justify-content: center;
@@ -54,5 +56,31 @@ border-radius: 16px;
     border: none;
   }
 
+  .submitButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+      button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: 1.06vw;
+        align-items: center;
+        max-width: 12vw;
+        padding: 1vw 2vw;
+        background-color: ${({ theme }) => theme.colors.red.primary};
+        border: none;
+        border-radius: 1.2vw;
+        box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+        color: white;
+      &:hover{
+        background-color: ${({ theme }) => theme.colors.red.light};
+      }
+      &:active{
+        background-color: ${({ theme }) => theme.colors.red.dark};
+      }
+      }
+  }
 
 `;

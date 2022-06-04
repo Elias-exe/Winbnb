@@ -8,6 +8,7 @@ export default function SearchBar({
   handleShowStayList,
   guestLabel,
   handleShowGuestInfos,
+  maximizedButton,
 }) {
   return (
     <Container size={size}>
@@ -26,7 +27,18 @@ export default function SearchBar({
         </div>
 
       </button>
-      <button id="search-icon" className="material-icons" type="button">search</button>
+      {!maximizedButton && (<button id="search-icon" className="material-icons" type="button">search</button>)}
+      {maximizedButton && (
+        <div className="submitButtonContainer">
+
+          <button type="submit">
+            <span className="material-icons">search</span>
+            <span>Search</span>
+          </button>
+        </div>
+
+      )}
+
     </Container>
   );
 }
@@ -37,6 +49,7 @@ SearchBar.propTypes = {
   buttonLabel: PropTypes.string,
   handleShowStayList: PropTypes.bool,
   handleShowGuestInfos: PropTypes.bool,
+  maximizedButton: PropTypes.bool,
 };
 
 SearchBar.defaultProps = {
@@ -44,4 +57,5 @@ SearchBar.defaultProps = {
   buttonLabel: 'Add Location',
   handleShowStayList: false,
   handleShowGuestInfos: false,
+  maximizedButton: false,
 };

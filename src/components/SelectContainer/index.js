@@ -60,9 +60,7 @@ export default function SelectContainer() {
   function handleChangeLabelName(event) {
     const labelName = [];
     labelName.push(event.target.innerText);
-    console.log(labelName);
-    const filteredLabelName = labelName.filter((label) => label !== 'pin_drop');
-    setButtonLabel(filteredLabelName.toString());
+    setButtonLabel(labelName.toString());
   }
 
   function handleShowGuestInfos() {
@@ -88,6 +86,7 @@ export default function SelectContainer() {
             size={1000}
             buttonLabel={buttonLabel}
             guestLabel={guestTotal}
+            maximizedButton
             handleShowStayList={handleShowStayList}
             handleShowGuestInfos={handleShowGuestInfos}
           />
@@ -95,12 +94,14 @@ export default function SelectContainer() {
             <div className="searchBar-container">
               {(showStayList) && (
                 filterStay.map((region) => (
-                  <button type="button" className="location" onClick={handleChangeLabelName}>
+                  <div className="location-container">
                     <span className="material-icons md-10">
                       pin_drop
                     </span>
-                    <span>{region.city}, {region.country}</span>
-                  </button>
+                    <button type="button" className="location" onClick={handleChangeLabelName}>
+                      <span>{region.city}, {region.country}</span>
+                    </button>
+                  </div>
                 ))
               )}
             </div>

@@ -38,17 +38,20 @@ export const Container = styled.div`
       width: 100%;
       max-width: 28vw;
 
-      .location{
-        display: flex;
-        align-items: center;
-        margin-bottom: 36px;
-        background: transparent;
-        border: none;
-
-        .material-icons{
-          margin-right: 10px;
+        .location-container{
+          display: flex;
+          margin-bottom: 36px;
         }
-      }
+
+          .location{
+            align-items: center;
+            background: transparent;
+            border: none;
+
+            .material-icons{
+              margin-right: 10px;
+            }
+          }
     }
   .guestContainer{
     margin-bottom: 70px;
