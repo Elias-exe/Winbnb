@@ -8,28 +8,38 @@ import Header from '../../components/Header';
 
 export default function Home() {
   const [house, setHouse] = useState([]);
+  const [component, setComponent] = useState(false);
 
   function loadHouses() {
     setHouse(stays);
+  }
+
+  function renderSelectContainer() {
+    const interruptorComponent = !component;
+    setComponent(interruptorComponent);
   }
 
   useEffect(() => {
     loadHouses();
   }, [loadHouses]);
 
+  console.log(component);
+
   return (
     <>
-      <SelectContainer />
-      <Header />
+      {component && (
+      <SelectContainer renderSelectContainer={renderSelectContainer} />
+      )}
+      <Header renderSelectContainer={renderSelectContainer} />
       <PageHeader />
 
       <CardGroup>
         {house.map((stay) => (
-          <Card>
+          <Card key={stay.title}>
             <img src={stay.photo} alt="Stay" />
             <div className="infos">
               {stay.superHost && (
-                <span className="host-tag">SUPER HOST</span>
+              <span className="host-tag">SUPER HOST</span>
               )}
               <span>{stay.type}</span>
               <div className="avaliation">

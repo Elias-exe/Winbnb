@@ -23,6 +23,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+
   .infos{
     display: flex;
     width: 80vw;

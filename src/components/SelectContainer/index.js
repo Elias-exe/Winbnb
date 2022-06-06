@@ -1,13 +1,17 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-one-expression-per-line */
 import ReactDOM from 'react-dom';
 import { useCallback, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import OutsideClickHandler from 'react-outside-click-handler/build/OutsideClickHandler';
 import SearchBar from '../SearchBar';
 import { Overlay, Container } from './styles';
 import stays from '../stays.json';
 
-export default function SelectContainer() {
+export default function SelectContainer({ renderSelectContainer }) {
   const [stay, setStay] = useState([]);
   const [buttonLabel, setButtonLabel] = useState('Add Location');
+  const [hidden, sethidden] = useState(true);
   const [showStayList, setShowStayList] = useState(false);
   const [showGuestInfos, setShowGuestInfos] = useState(false);
   const [adultsCount, setAdultsCount] = useState(0);
@@ -79,62 +83,76 @@ export default function SelectContainer() {
   ), [adultsCount, childrenCount]);
 
   return ReactDOM.createPortal(
-    <Overlay>
-      <Container>
-        <div className="infos">
-          <SearchBar
-            size={1000}
-            buttonLabel={buttonLabel}
-            guestLabel={guestTotal}
-            maximizedButton
-            handleShowStayList={handleShowStayList}
-            handleShowGuestInfos={handleShowGuestInfos}
-          />
-          <div className="testes">
-            <div className="searchBar-container">
-              {(showStayList) && (
-                filterStay.map((region) => (
-                  <div className="location-container">
-                    <span className="material-icons md-10">
-                      pin_drop
-                    </span>
-                    <button type="button" className="location" onClick={handleChangeLabelName}>
-                      <span>{region.city}, {region.country}</span>
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="guestContainer">
-              {(showGuestInfos) && (
-                <>
-                  <div className="guestInfos">
-                    <strong>Adults</strong>
-                    <span>Ages 13 or above</span>
-                    <div className="contador">
-                      <button type="button" onClick={handleAdultsMinus}>-</button>
-                      <strong>{adultsCount}</strong>
-                      <button type="button" onClick={handleAdultsPlus}>+</button>
+    <>
+      {hidden && (
+      <Overlay>
+        <OutsideClickHandler onOutsideClick={() => {
+          sethidden(false);
+          renderSelectContainer(true);
+        }}
+        >
+          <Container>
+            <div className="infos">
+              <SearchBar
+                size={1000}
+                buttonLabel={buttonLabel}
+                guestLabel={guestTotal}
+                maximizedButton
+                handleShowStayList={handleShowStayList}
+                handleShowGuestInfos={handleShowGuestInfos}
+              />
+              <div className="testes">
+                <div className="searchBar-container">
+                  {(showStayList) && (
+                    filterStay.map((region) => (
+                      <div className="location-container">
+                        <span className="material-icons md-10">
+                          pin_drop
+                        </span>
+                        <button type="button" className="location" onClick={handleChangeLabelName}>
+                          <span>{region.city}, {region.country}</span>
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+                <div className="guestContainer">
+                  {(showGuestInfos) && (
+                  <>
+                    <div className="guestInfos">
+                      <strong>Adults</strong>
+                      <span>Ages 13 or above</span>
+                      <div className="contador">
+                        <button type="button" onClick={handleAdultsMinus}>-</button>
+                        <strong>{adultsCount}</strong>
+                        <button type="button" onClick={handleAdultsPlus}>+</button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="guestInfos">
-                    <strong>Children</strong>
-                    <span>Ages 2 - 12</span>
-                    <div className="contador">
-                      <button type="button" onClick={handleChildrensMinus}>-</button>
-                      <strong>{childrenCount}</strong>
-                      <button type="button" onClick={handleChildrensPlus}>+</button>
+                    <div className="guestInfos">
+                      <strong>Children</strong>
+                      <span>Ages 2 - 12</span>
+                      <div className="contador">
+                        <button type="button" onClick={handleChildrensMinus}>-</button>
+                        <strong>{childrenCount}</strong>
+                        <button type="button" onClick={handleChildrensPlus}>+</button>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                  )}
+                </div>
+              </div>
             </div>
+          </Container>
+        </OutsideClickHandler>
+      </Overlay>
+      )}
 
-          </div>
-
-        </div>
-      </Container>
-    </Overlay>,
+    </>,
     document.getElementById('selection-root'),
+
   );
 }
+
+SelectContainer.propTypes = {
+  renderSelectContainer: PropTypes.func.isRequired,
+};

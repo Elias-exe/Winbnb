@@ -9,10 +9,11 @@ export default function SearchBar({
   guestLabel,
   handleShowGuestInfos,
   maximizedButton,
+  renderSelectContainer,
 }) {
   return (
     <Container size={size}>
-      <button type="button" onClick={handleShowStayList}>
+      <button type="button" onClick={renderSelectContainer || handleShowStayList}>
         <div className="location-container">
           <div className="location-label">
             <strong>Location</strong>
@@ -20,7 +21,7 @@ export default function SearchBar({
           {buttonLabel}
         </div>
       </button>
-      <button type="button" onClick={handleShowGuestInfos}>
+      <button type="button" onClick={renderSelectContainer || handleShowGuestInfos}>
         <div className="guestButtonContainer">
           <strong>Guest</strong>
           { guestLabel === 0 ? 'Add guests' : (guestLabel > 1 ? `${guestLabel} guests` : `${guestLabel} guest`)}
@@ -36,25 +37,25 @@ export default function SearchBar({
             <span>Search</span>
           </button>
         </div>
-
       )}
-
     </Container>
   );
 }
 
 SearchBar.propTypes = {
   size: PropTypes.number,
-  guestLabel: PropTypes.number.isRequired,
+  guestLabel: PropTypes.number,
   buttonLabel: PropTypes.string,
   handleShowStayList: PropTypes.bool,
   handleShowGuestInfos: PropTypes.bool,
   maximizedButton: PropTypes.bool,
+  renderSelectContainer: PropTypes.func.isRequired,
 };
 
 SearchBar.defaultProps = {
-  size: 300,
+  size: 400,
   buttonLabel: 'Add Location',
+  guestLabel: 0,
   handleShowStayList: false,
   handleShowGuestInfos: false,
   maximizedButton: false,
