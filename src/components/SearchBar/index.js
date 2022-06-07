@@ -10,7 +10,16 @@ export default function SearchBar({
   handleShowGuestInfos,
   maximizedButton,
   renderSelectContainer,
+  onSubmit,
+  sethidden,
+  removeComponent,
 }) {
+  function handleSubmit() {
+    const interruptor = !sethidden;
+    sethidden(interruptor);
+    removeComponent(true);
+  }
+
   return (
     <Container size={size}>
       <button type="button" onClick={renderSelectContainer || handleShowStayList}>
@@ -32,7 +41,13 @@ export default function SearchBar({
       {maximizedButton && (
         <div className="submitButtonContainer">
 
-          <button type="submit">
+          <button
+            type="submit"
+            onClick={(event) => {
+              onSubmit(event);
+              handleSubmit();
+            }}
+          >
             <span className="material-icons">search</span>
             <span>Search</span>
           </button>
@@ -49,7 +64,10 @@ SearchBar.propTypes = {
   handleShowStayList: PropTypes.bool,
   handleShowGuestInfos: PropTypes.bool,
   maximizedButton: PropTypes.bool,
+  sethidden: PropTypes.bool.isRequired,
   renderSelectContainer: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  removeComponent: PropTypes.bool.isRequired,
 };
 
 SearchBar.defaultProps = {

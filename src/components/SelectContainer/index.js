@@ -8,10 +8,12 @@ import SearchBar from '../SearchBar';
 import { Overlay, Container } from './styles';
 import stays from '../stays.json';
 
-export default function SelectContainer({ renderSelectContainer }) {
+export default function SelectContainer({ renderSelectContainer, onSubmit }) {
   const [stay, setStay] = useState([]);
   const [buttonLabel, setButtonLabel] = useState('Add Location');
-  const [hidden, sethidden] = useState(true);
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  const [hidden, setHidden] = useState(true);
   const [showStayList, setShowStayList] = useState(false);
   const [showGuestInfos, setShowGuestInfos] = useState(false);
   const [adultsCount, setAdultsCount] = useState(0);
@@ -64,6 +66,8 @@ export default function SelectContainer({ renderSelectContainer }) {
   function handleChangeLabelName(event) {
     const labelName = [];
     labelName.push(event.target.innerText);
+    setCity(event.target.firstChild.data);
+    setCountry(event.target.lastChild.data);
     setButtonLabel(labelName.toString());
   }
 
@@ -72,6 +76,12 @@ export default function SelectContainer({ renderSelectContainer }) {
       ? setShowGuestInfos(false)
       : setShowGuestInfos(true);
     return changeShowGuestInfos;
+  }
+
+  function handleSubmit() {
+    onSubmit({
+      city, country, childrenCount, adultsCount, guestTotal,
+    });
   }
 
   useEffect(() => (
@@ -87,7 +97,7 @@ export default function SelectContainer({ renderSelectContainer }) {
       {hidden && (
       <Overlay>
         <OutsideClickHandler onOutsideClick={() => {
-          sethidden(false);
+          setHidden(false);
           renderSelectContainer(true);
         }}
         >
@@ -100,6 +110,9 @@ export default function SelectContainer({ renderSelectContainer }) {
                 maximizedButton
                 handleShowStayList={handleShowStayList}
                 handleShowGuestInfos={handleShowGuestInfos}
+                onSubmit={handleSubmit}
+                sethidden={setHidden}
+                removeComponent={renderSelectContainer}
               />
               <div className="testes">
                 <div className="searchBar-container">
@@ -109,7 +122,13 @@ export default function SelectContainer({ renderSelectContainer }) {
                         <span className="material-icons md-10">
                           pin_drop
                         </span>
-                        <button type="button" className="location" onClick={handleChangeLabelName}>
+                        <button
+                          type="button"
+                          className="location"
+                          onClick={(event) => {
+                            handleChangeLabelName(event);
+                          }}
+                        >
                           <span>{region.city}, {region.country}</span>
                         </button>
                       </div>
@@ -155,4 +174,5 @@ export default function SelectContainer({ renderSelectContainer }) {
 
 SelectContainer.propTypes = {
   renderSelectContainer: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CardGroup, Card } from './styles';
 import stays from '../../components/stays.json';
 
@@ -8,33 +8,55 @@ import Header from '../../components/Header';
 
 export default function Home() {
   const [house, setHouse] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [component, setComponent] = useState(false);
+
+  const filteredHouses = useMemo(() => house.filter((houses) => (
+    houses.city === filteredData.city
+    && houses.maxGuests === filteredData.guestTotal
+  )), [house, filteredData]);
+
+  const houseTotal = filteredHouses.length;
 
   function loadHouses() {
     setHouse(stays);
   }
 
   function renderSelectContainer() {
-    const interruptorComponent = !component;
-    setComponent(interruptorComponent);
+    const removeComponent = !component;
+    setComponent(removeComponent);
+  }
+
+  function handleSubmit(stayData) {
+    const dataFromFilter = {
+      city: stayData.city,
+      country: stayData.country,
+      childrenCount: stayData.childrenCount,
+      adultsCount: stayData.adultsCount,
+      guestTotal: stayData.guestTotal,
+    };
+    setFilteredData(dataFromFilter);
   }
 
   useEffect(() => {
     loadHouses();
   }, [loadHouses]);
 
-  console.log(component);
-
   return (
     <>
       {component && (
-      <SelectContainer renderSelectContainer={renderSelectContainer} />
+      <SelectContainer
+        renderSelectContainer={renderSelectContainer}
+        onSubmit={handleSubmit}
+      />
       )}
-      <Header renderSelectContainer={renderSelectContainer} />
-      <PageHeader />
+      <Header
+        renderSelectContainer={renderSelectContainer}
+      />
+      <PageHeader staysTotal={houseTotal} />
 
       <CardGroup>
-        {house.map((stay) => (
+        {(filteredHouses.length === 0 ? house : filteredHouses).map((stay) => (
           <Card key={stay.title}>
             <img src={stay.photo} alt="Stay" />
             <div className="infos">
