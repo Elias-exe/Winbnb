@@ -1,4 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect, useState,
+} from 'react';
 import { CardGroup, Card } from './styles';
 import stays from '../../components/stays.json';
 
@@ -8,24 +11,17 @@ import Header from '../../components/Header';
 
 export default function Home() {
   const [house, setHouse] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+  const [receiveFilteredData, setReceiveFilteredData] = useState([]);
   const [component, setComponent] = useState(false);
 
-  const filteredHouses = useMemo(() => house.filter((houses) => (
-    houses.city === filteredData.city
-    && houses.maxGuests === filteredData.guestTotal
-  )), [house, filteredData]);
-
-  const houseTotal = filteredHouses.length;
-
-  function loadHouses() {
-    setHouse(stays);
-  }
-
-  function renderSelectContainer() {
+  function handleRenderSelectContainer() {
     const removeComponent = !component;
     setComponent(removeComponent);
   }
+
+  const loadHouses = useCallback(() => {
+    setHouse(stays);
+  }, []);
 
   function handleSubmit(stayData) {
     const dataFromFilter = {
@@ -35,28 +31,44 @@ export default function Home() {
       adultsCount: stayData.adultsCount,
       guestTotal: stayData.guestTotal,
     };
-    setFilteredData(dataFromFilter);
+    setReceiveFilteredData(dataFromFilter);
   }
+
+  const filterStays = (filteredData) => {
+    if (receiveFilteredData.length === 0) {
+      return filteredData;
+    }
+
+    const filtredStays = filteredData.filter(
+      (stay) => stay.city === receiveFilteredData.city
+      && stay.maxGuests === receiveFilteredData.guestTotal,
+    );
+    return filtredStays;
+  };
+
+  const houseTotal = filterStays(house).length;
 
   useEffect(() => {
     loadHouses();
   }, [loadHouses]);
 
+  console.log(house);
+
   return (
     <>
       {component && (
       <SelectContainer
-        renderSelectContainer={renderSelectContainer}
+        handleRenderSelectContainer={handleRenderSelectContainer}
         onSubmit={handleSubmit}
       />
       )}
       <Header
-        renderSelectContainer={renderSelectContainer}
+        handleRenderSelectContainer={handleRenderSelectContainer}
       />
       <PageHeader staysTotal={houseTotal} />
 
       <CardGroup>
-        {(filteredHouses.length === 0 ? house : filteredHouses).map((stay) => (
+        {filterStays(house).map((stay) => (
           <Card key={stay.title}>
             <img src={stay.photo} alt="Stay" />
             <div className="infos">

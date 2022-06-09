@@ -4,19 +4,23 @@ import { Container } from './styles';
 import logo from '../../assets/styles/images/logo.svg';
 import SearchBar from '../SearchBar';
 
-export default function Header({ renderSelectContainer, onSubmit }) {
+export default function Header({
+  handleRenderSelectContainer, onSubmit, filteredHouses,
+}) {
   return (
     <Container>
       <img src={logo} alt="Winbnb" />
       <SearchBar
-        renderSelectContainer={renderSelectContainer}
+        handleRenderSelectContainer={handleRenderSelectContainer}
         onSubmit={onSubmit}
+        filteredHouses={filteredHouses}
       />
     </Container>
   );
 }
 
 Header.propTypes = {
-  renderSelectContainer: PropTypes.func.isRequired,
+  handleRenderSelectContainer: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  filteredHouses: PropTypes.func.isRequired,
 };

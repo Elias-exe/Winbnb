@@ -8,7 +8,12 @@ import SearchBar from '../SearchBar';
 import { Overlay, Container } from './styles';
 import stays from '../stays.json';
 
-export default function SelectContainer({ renderSelectContainer, onSubmit }) {
+export default function SelectContainer({
+  handleRenderSelectContainer,
+  onSubmit,
+  handleFilteredHouses,
+  setFilterIsTrue,
+}) {
   const [stay, setStay] = useState([]);
   const [buttonLabel, setButtonLabel] = useState('Add Location');
   const [city, setCity] = useState('');
@@ -98,7 +103,7 @@ export default function SelectContainer({ renderSelectContainer, onSubmit }) {
       <Overlay>
         <OutsideClickHandler onOutsideClick={() => {
           setHidden(false);
-          renderSelectContainer(true);
+          handleRenderSelectContainer(true);
         }}
         >
           <Container>
@@ -112,7 +117,9 @@ export default function SelectContainer({ renderSelectContainer, onSubmit }) {
                 handleShowGuestInfos={handleShowGuestInfos}
                 onSubmit={handleSubmit}
                 sethidden={setHidden}
-                removeComponent={renderSelectContainer}
+                removeComponent={handleRenderSelectContainer}
+                handleFilteredHouses={handleFilteredHouses}
+                setFilterIsTrue={setFilterIsTrue}
               />
               <div className="testes">
                 <div className="searchBar-container">
@@ -173,6 +180,8 @@ export default function SelectContainer({ renderSelectContainer, onSubmit }) {
 }
 
 SelectContainer.propTypes = {
-  renderSelectContainer: PropTypes.func.isRequired,
+  handleRenderSelectContainer: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  handleFilteredHouses: PropTypes.func.isRequired,
+  setFilterIsTrue: PropTypes.bool.isRequired,
 };

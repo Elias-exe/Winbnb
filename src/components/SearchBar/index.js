@@ -9,10 +9,12 @@ export default function SearchBar({
   guestLabel,
   handleShowGuestInfos,
   maximizedButton,
-  renderSelectContainer,
+  handleRenderSelectContainer,
   onSubmit,
   sethidden,
   removeComponent,
+  handleFilteredHouses,
+  setFilterIsTrue,
 }) {
   function handleSubmit() {
     const interruptor = !sethidden;
@@ -22,7 +24,7 @@ export default function SearchBar({
 
   return (
     <Container size={size}>
-      <button type="button" onClick={renderSelectContainer || handleShowStayList}>
+      <button type="button" onClick={handleRenderSelectContainer || handleShowStayList}>
         <div className="location-container">
           <div className="location-label">
             <strong>Location</strong>
@@ -30,7 +32,7 @@ export default function SearchBar({
           {buttonLabel}
         </div>
       </button>
-      <button type="button" onClick={renderSelectContainer || handleShowGuestInfos}>
+      <button type="button" onClick={handleRenderSelectContainer || handleShowGuestInfos}>
         <div className="guestButtonContainer">
           <strong>Guest</strong>
           { guestLabel === 0 ? 'Add guests' : (guestLabel > 1 ? `${guestLabel} guests` : `${guestLabel} guest`)}
@@ -45,6 +47,8 @@ export default function SearchBar({
             type="submit"
             onClick={(event) => {
               onSubmit(event);
+              setFilterIsTrue(true);
+              handleFilteredHouses();
               handleSubmit();
             }}
           >
@@ -65,9 +69,11 @@ SearchBar.propTypes = {
   handleShowGuestInfos: PropTypes.bool,
   maximizedButton: PropTypes.bool,
   sethidden: PropTypes.bool.isRequired,
-  renderSelectContainer: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   removeComponent: PropTypes.bool.isRequired,
+  setFilterIsTrue: PropTypes.bool,
+  handleRenderSelectContainer: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  handleFilteredHouses: PropTypes.func.isRequired,
 };
 
 SearchBar.defaultProps = {
@@ -77,4 +83,5 @@ SearchBar.defaultProps = {
   handleShowStayList: false,
   handleShowGuestInfos: false,
   maximizedButton: false,
+  setFilterIsTrue: false,
 };
