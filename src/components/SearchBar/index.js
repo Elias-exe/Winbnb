@@ -13,8 +13,6 @@ export default function SearchBar({
   onSubmit,
   sethidden,
   removeComponent,
-  handleFilteredHouses,
-  setFilterIsTrue,
 }) {
   function handleSubmit() {
     const interruptor = !sethidden;
@@ -32,30 +30,26 @@ export default function SearchBar({
           {buttonLabel}
         </div>
       </button>
-      <button type="button" onClick={handleRenderSelectContainer || handleShowGuestInfos}>
+      <button className="guestButton" type="button" onClick={handleRenderSelectContainer || handleShowGuestInfos}>
         <div className="guestButtonContainer">
           <strong>Guest</strong>
           { guestLabel === 0 ? 'Add guests' : (guestLabel > 1 ? `${guestLabel} guests` : `${guestLabel} guest`)}
         </div>
-
       </button>
       {!maximizedButton && (<button id="search-icon" className="material-icons" type="button">search</button>)}
       {maximizedButton && (
-        <div className="submitButtonContainer">
-
-          <button
-            type="submit"
-            onClick={(event) => {
-              onSubmit(event);
-              setFilterIsTrue(true);
-              handleFilteredHouses();
-              handleSubmit();
-            }}
-          >
-            <span className="material-icons">search</span>
-            <span>Search</span>
-          </button>
-        </div>
+      <div className="submitButtonContainer">
+        <button
+          type="submit"
+          onClick={(event) => {
+            onSubmit(event);
+            handleSubmit();
+          }}
+        >
+          <span className="material-icons">search</span>
+          <span>Search</span>
+        </button>
+      </div>
       )}
     </Container>
   );
@@ -70,10 +64,8 @@ SearchBar.propTypes = {
   maximizedButton: PropTypes.bool,
   sethidden: PropTypes.bool.isRequired,
   removeComponent: PropTypes.bool.isRequired,
-  setFilterIsTrue: PropTypes.bool,
   handleRenderSelectContainer: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  handleFilteredHouses: PropTypes.func.isRequired,
 };
 
 SearchBar.defaultProps = {
@@ -83,5 +75,4 @@ SearchBar.defaultProps = {
   handleShowStayList: false,
   handleShowGuestInfos: false,
   maximizedButton: false,
-  setFilterIsTrue: false,
 };

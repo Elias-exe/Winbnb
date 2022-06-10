@@ -5,14 +5,12 @@ import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import OutsideClickHandler from 'react-outside-click-handler/build/OutsideClickHandler';
 import SearchBar from '../SearchBar';
-import { Overlay, Container } from './styles';
+import { Overlay, Container, ShowInfos } from './styles';
 import stays from '../stays.json';
 
 export default function SelectContainer({
   handleRenderSelectContainer,
   onSubmit,
-  handleFilteredHouses,
-  setFilterIsTrue,
 }) {
   const [stay, setStay] = useState([]);
   const [buttonLabel, setButtonLabel] = useState('Add Location');
@@ -118,10 +116,8 @@ export default function SelectContainer({
                 onSubmit={handleSubmit}
                 sethidden={setHidden}
                 removeComponent={handleRenderSelectContainer}
-                handleFilteredHouses={handleFilteredHouses}
-                setFilterIsTrue={setFilterIsTrue}
               />
-              <div className="testes">
+              <ShowInfos>
                 <div className="searchBar-container">
                   {(showStayList) && (
                     filterStay.map((region) => (
@@ -144,35 +140,34 @@ export default function SelectContainer({
                 </div>
                 <div className="guestContainer">
                   {(showGuestInfos) && (
-                  <>
-                    <div className="guestInfos">
-                      <strong>Adults</strong>
-                      <span>Ages 13 or above</span>
-                      <div className="contador">
-                        <button type="button" onClick={handleAdultsMinus}>-</button>
-                        <strong>{adultsCount}</strong>
-                        <button type="button" onClick={handleAdultsPlus}>+</button>
+                    <>
+                      <div className="guestInfos">
+                        <strong>Adults</strong>
+                        <span>Ages 13 or above</span>
+                        <div className="contador">
+                          <button type="button" onClick={handleAdultsMinus}>-</button>
+                          <strong>{adultsCount}</strong>
+                          <button type="button" onClick={handleAdultsPlus}>+</button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="guestInfos">
-                      <strong>Children</strong>
-                      <span>Ages 2 - 12</span>
-                      <div className="contador">
-                        <button type="button" onClick={handleChildrensMinus}>-</button>
-                        <strong>{childrenCount}</strong>
-                        <button type="button" onClick={handleChildrensPlus}>+</button>
+                      <div className="guestInfos">
+                        <strong>Children</strong>
+                        <span>Ages 2 - 12</span>
+                        <div className="contador">
+                          <button type="button" onClick={handleChildrensMinus}>-</button>
+                          <strong>{childrenCount}</strong>
+                          <button type="button" onClick={handleChildrensPlus}>+</button>
+                        </div>
                       </div>
-                    </div>
-                  </>
+                    </>
                   )}
                 </div>
-              </div>
+              </ShowInfos>
             </div>
           </Container>
         </OutsideClickHandler>
       </Overlay>
       )}
-
     </>,
     document.getElementById('selection-root'),
 
@@ -182,6 +177,4 @@ export default function SelectContainer({
 SelectContainer.propTypes = {
   handleRenderSelectContainer: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  handleFilteredHouses: PropTypes.func.isRequired,
-  setFilterIsTrue: PropTypes.bool.isRequired,
 };

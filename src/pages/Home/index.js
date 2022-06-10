@@ -52,8 +52,6 @@ export default function Home() {
     loadHouses();
   }, [loadHouses]);
 
-  console.log(house);
-
   return (
     <>
       {component && (

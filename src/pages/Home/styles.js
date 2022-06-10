@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 display: block;
+
+@media screen and (max-width: 720px){
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
 `;
 
 export const CardGroup = styled.div`
@@ -9,11 +15,24 @@ width: 100%;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 grid-gap: 32px;
+
+@media screen and (max-width: 720px){
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
 `;
 
 export const Card = styled.div`
 width: 100%;
-max-width: 400px;
+max-width: 500px;
+
+@media screen and (max-width: 720px){
+  &+&{
+    margin-top: 49px;
+  }
+}
 
 &+&+&+&{
   margin-top: 49px;

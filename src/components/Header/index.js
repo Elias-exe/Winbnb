@@ -5,15 +5,16 @@ import logo from '../../assets/styles/images/logo.svg';
 import SearchBar from '../SearchBar';
 
 export default function Header({
-  handleRenderSelectContainer, onSubmit, filteredHouses,
+  handleRenderSelectContainer,
+  buttonLabel,
 }) {
+  console.log(buttonLabel);
   return (
     <Container>
       <img src={logo} alt="Winbnb" />
       <SearchBar
+        buttonLabel={buttonLabel}
         handleRenderSelectContainer={handleRenderSelectContainer}
-        onSubmit={onSubmit}
-        filteredHouses={filteredHouses}
       />
     </Container>
   );
@@ -21,6 +22,5 @@ export default function Header({
 
 Header.propTypes = {
   handleRenderSelectContainer: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  filteredHouses: PropTypes.func.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
 };

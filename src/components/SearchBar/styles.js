@@ -61,13 +61,17 @@ button{
     align-items: center;
     justify-content: center;
 
+    @media screen and (max-width: 720px){
+      display: flex;
+      margin-top: 10px;
+    }
+
       button{
         width: 100%;
         display: flex;
         justify-content: center;
-        font-size: 1.06vw;
         align-items: center;
-        max-width: 12vw;
+        max-width: 25vw;
         padding: 1vw 2vw;
         background-color: ${({ theme }) => theme.colors.red.primary};
         border: none;
@@ -82,5 +86,4 @@ button{
       }
       }
   }
-
 `;
