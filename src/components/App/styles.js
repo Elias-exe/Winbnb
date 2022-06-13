@@ -5,6 +5,8 @@ margin: 0 auto;
 padding: 0 96px;
 
 @media screen and (max-width: 720px){
-  padding: 12px
+  padding: 12px;
+  margin: 0 auto;
 }
+
 `;

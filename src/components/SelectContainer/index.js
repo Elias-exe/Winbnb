@@ -81,6 +81,12 @@ export default function SelectContainer({
     return changeShowGuestInfos;
   }
 
+  function handleOcultGuestInfos() {
+    if (showStayList) {
+      setShowStayList(false);
+    }
+  }
+
   function handleSubmit() {
     onSubmit({
       city, country, childrenCount, adultsCount, guestTotal,
@@ -130,6 +136,7 @@ export default function SelectContainer({
                           className="location"
                           onClick={(event) => {
                             handleChangeLabelName(event);
+                            handleOcultGuestInfos(event);
                           }}
                         >
                           <span>{region.city}, {region.country}</span>

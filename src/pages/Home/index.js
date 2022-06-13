@@ -13,6 +13,8 @@ export default function Home() {
   const [house, setHouse] = useState([]);
   const [receiveFilteredData, setReceiveFilteredData] = useState([]);
   const [component, setComponent] = useState(false);
+  const [buttonLabel, setButtonLabel] = useState('Add Location');
+  const [guestLabel, setGuestLabel] = useState(0);
 
   function handleRenderSelectContainer() {
     const removeComponent = !component;
@@ -46,11 +48,27 @@ export default function Home() {
     return filtredStays;
   };
 
+  const handleChangeLabelName = useCallback(() => {
+    if (receiveFilteredData.city === undefined && receiveFilteredData.country === undefined) {
+      setButtonLabel('Add Location');
+    } else {
+      setButtonLabel(`${receiveFilteredData.city}, ${receiveFilteredData.country}`);
+    }
+  });
+
+  const handleChangeGuestLabel = useCallback(() => {
+    if (receiveFilteredData.guestTotal >= 0) {
+      setGuestLabel(receiveFilteredData.guestTotal);
+    }
+  });
+
   const houseTotal = filterStays(house).length;
 
   useEffect(() => {
     loadHouses();
-  }, [loadHouses]);
+    handleChangeLabelName();
+    handleChangeGuestLabel();
+  }, [loadHouses, handleChangeLabelName, handleChangeGuestLabel]);
 
   return (
     <>
@@ -61,9 +79,13 @@ export default function Home() {
       />
       )}
       <Header
+        guestLabel={guestLabel}
+        buttonLabel={buttonLabel}
         handleRenderSelectContainer={handleRenderSelectContainer}
       />
-      <PageHeader staysTotal={houseTotal} />
+      <PageHeader
+        staysTotal={houseTotal}
+      />
 
       <CardGroup>
         {filterStays(house).map((stay) => (

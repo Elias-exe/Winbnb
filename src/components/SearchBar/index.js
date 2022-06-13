@@ -30,7 +30,14 @@ export default function SearchBar({
           {buttonLabel}
         </div>
       </button>
-      <button className="guestButton" type="button" onClick={handleRenderSelectContainer || handleShowGuestInfos}>
+      <button
+        className="guestButton"
+        type="button"
+        onClick={
+        handleRenderSelectContainer
+         || handleShowGuestInfos
+}
+      >
         <div className="guestButtonContainer">
           <strong>Guest</strong>
           { guestLabel === 0 ? 'Add guests' : (guestLabel > 1 ? `${guestLabel} guests` : `${guestLabel} guest`)}

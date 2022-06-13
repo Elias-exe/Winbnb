@@ -22,13 +22,25 @@ grid-gap: 32px;
   max-width: 700px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 820px){
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 820px;
+}
+
+@media screen and (max-width:1100px){
+  grid-gap: 80px;
+}
 `;
 
 export const Card = styled.div`
 width: 100%;
 max-width: 500px;
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 820px){
   &+&{
     margin-top: 49px;
   }
@@ -44,6 +56,12 @@ max-width: 500px;
     max-height: 270px;
     border-radius: 24px;
     object-fit: cover;
+    @media screen and (max-width: 1100px){
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      max-height: 300px;
+    }
   }
 
   .infos{
@@ -64,6 +82,10 @@ max-width: 500px;
       padding: 9px;
       font-size: 12px;
       font-weight: bold;
+    @media screen and (max-width: 1100px){
+      padding: 2px;
+      margin-right: 8px;
+    }
     }
   }
 

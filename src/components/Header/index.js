@@ -7,12 +7,13 @@ import SearchBar from '../SearchBar';
 export default function Header({
   handleRenderSelectContainer,
   buttonLabel,
+  guestLabel,
 }) {
-  console.log(buttonLabel);
   return (
     <Container>
       <img src={logo} alt="Winbnb" />
       <SearchBar
+        guestLabel={guestLabel}
         buttonLabel={buttonLabel}
         handleRenderSelectContainer={handleRenderSelectContainer}
       />
@@ -22,5 +23,11 @@ export default function Header({
 
 Header.propTypes = {
   handleRenderSelectContainer: PropTypes.func.isRequired,
-  buttonLabel: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string,
+  guestLabel: PropTypes.number,
+};
+
+Header.defaultProps = {
+  buttonLabel: 'Add Location',
+  guestLabel: 0,
 };
