@@ -11,7 +11,7 @@ export default function Header({
 }) {
   return (
     <Container>
-      <img src={logo} alt="Winbnb" />
+      <a href="/"><img src={logo} alt="Winbnb" /></a>
       <SearchBar
         guestLabel={guestLabel}
         buttonLabel={buttonLabel}
